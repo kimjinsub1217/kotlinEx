@@ -1,5 +1,3 @@
-import java.util.Scanner
-
 fun main() {
     val carFactory = CarFactory()
     var selectNumber = 0
@@ -18,10 +16,11 @@ fun main() {
     carFactory.printToyTotalAvgPrice()
     carFactory.printBoarding()
     carFactory.printuel()
+
 }
 
 class CarFactory() {
-    private val sc = Scanner(System.`in`)
+
     val carList = ArrayList<Car>()
 
     fun selectCarType(): Int {
@@ -31,7 +30,7 @@ class CarFactory() {
         do {
             println("생산할 장난감의 종류를 선택해주세요")
             print("1. 붕붕, 2. 승용차, 3. 버스, 4. 트럭, 0. 생산종료 : ")
-            selectNumber = sc.nextInt()
+            selectNumber = readln().toInt()
 
             if (selectNumber !in 0..4) {
                 println("잘못 입력하였습니다")
