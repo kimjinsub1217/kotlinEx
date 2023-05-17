@@ -94,6 +94,7 @@ abstract class Zoo {
 
 
 
+
 // 동물 인터페이스
 abstract class Animal : Swimmable, Runnable, Hunter, type {
     open fun eat() {}
