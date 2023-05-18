@@ -226,6 +226,7 @@ sealed class Student(
     val math: Int
 ) {
     // 일반부
+    //data classs 클래스는 sealed class 클래스를 상속받고 있다.
     data class GeneralStudent(
         val generalBelong: BelongEnum,
         val generalName: String,
@@ -233,37 +234,9 @@ sealed class Student(
         val generalKorean: Int,
         val generalEnglish: Int,
         val generalMath: Int
-    ) : Student(generalBelong, generalName, generalGrade, generalKorean, generalEnglish, generalMath)
+    ) : Student(generalBelong, generalName, generalGrade, generalKorean, generalEnglish, generalMath) // Student 클래스의 프로퍼티들을 인자로 받아 초기화
 
-    // 축구부
-    data class SoccerStudent(
-        val soccerBelong: BelongEnum,
-        val soccerName: String,
-        val soccerGrade: Int,
-        val soccerKorean: Int,
-        val soccerEnglish: Int,
-        val soccerMath: Int
-    ) : Student(soccerBelong, soccerName, soccerGrade, soccerKorean, soccerEnglish, soccerMath)
 
-    // 배구부
-    data class VolleyballStudent(
-        val volleyballBelong: BelongEnum,
-        val volleyballName: String,
-        val volleyballGrade: Int,
-        val volleyballKorean: Int,
-        val volleyballEnglish: Int,
-        val volleyballMath: Int
-    ) : Student(volleyballBelong, volleyballName, volleyballGrade, volleyballKorean, volleyballEnglish, volleyballMath)
-
-    // 수영부
-    data class SwimmingStudent(
-        val swimmingBelong: BelongEnum,
-        val swimmingName: String,
-        val swimmingGrade: Int,
-        val swimmingKorean: Int,
-        val swimmingEnglish: Int,
-        val swimmingMath: Int
-    ) : Student(swimmingBelong, swimmingName, swimmingGrade, swimmingKorean, swimmingEnglish, swimmingMath)
 }
 
 class School() {
