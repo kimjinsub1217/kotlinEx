@@ -5,43 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c7f9d7a-3d59-489c-84c4-866e10344317" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/../Kotlin51_frameWorkEx1/Kotlin51_frameWorkEx1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Kotlin51_frameWorkEx1/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/kotlin25_refactoring.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin25_refactoring/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin42_Exception/kotlin42_Exception.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin42_Exception/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin43_thread/kotlin43_thread.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin43_thread/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin44_stream/kotlin44_stream.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin44_stream/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_ex/kotlin45_ex.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_ex/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/kotlin45_exAnswer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin45_exAnswer/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kotlin50_framework.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/main.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe/src/main/kotlin/main.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/src/main/kotlin/main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,13 +35,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/kotlinEx/kotlin50_framework"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/kotlinEx/kotlin50_framework&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
