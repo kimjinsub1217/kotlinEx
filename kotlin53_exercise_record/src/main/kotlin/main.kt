@@ -119,7 +119,7 @@ class MainClass {
     fun recordPrint() {
         println()
         val keysList = exerciseRecords.keys.toList()
-        val sortedKeys = keysList.sorted().distinct()
+        val sortedKeys = keysList.sorted()
         for ((index, key) in sortedKeys.withIndex()) {
             println("${index + 1}. $key")
         }
