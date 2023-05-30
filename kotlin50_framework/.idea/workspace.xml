@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c7f9d7a-3d59-489c-84c4-866e10344317" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe/src/main/kotlin/main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../kotlin52_tictactoe_answer/src/main/kotlin/main.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kotlinProject_Notepad/src/main/kotlin/main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kotlin53_exercise_record_answer/src/main/kotlin/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../kotlin53_exercise_record_answer/src/main/kotlin/main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
