@@ -1,6 +1,13 @@
 import java.io.*
 import kotlin.system.exitProcess
-
+/*
+O 1. 프로그램 실행시 설정된 비밀번호가 없다면 비밀번호를 설정하는 기능이 먼저 나와야 한다.
+O 2. 설정된 비밀번호가 있다면 로그인 화면이 나온다.
+O 3. 제목과 내용은 띄어쓰기 입력을 허용한다.
+O 4. 모든 입력에 대해 잘못된 입력(허용하지 않는 숫자나 문자열 입력)에 대해 잘못된 입력이라는 문구를 보여줘야 한다.
+O 5. 카테고리나 메모가 등록된게 없을 경우 카테고리나 메모 목록을 보여주는 화면에서는 등록된 것이 없다는 메시지를 보여줘야 한다.
+O 6. 비밀번호, 카테고리 정보, 메모 내용 정보 등은 모두 파일에 저장을 하고 파일에서 불러와 보여주는 것으로 처리 한다.
+ */
 fun main() {
     val mainClass = MainClass()
     mainClass.running()
@@ -11,9 +18,6 @@ class MainClass {
 
     // 프로그램 상태를 담는 변수에 초기 상태를 설정한다.( 비밀번호 화면 일치하면 메인 화면으로 상태 변경)
     var passwordProgramState = ProgramPassWordMainState.PROGRAM_STATE_PASSWORD
-
-    // 프로그램 상태를 담는 변수에 초기 상태를 설정한다.( 비밀번호 화면 일치하면 메인 화면으로 상태 변경)
-    var mainProgramMainState = ProgramMainState.PROGRAM_STATE_List
 
     // 각 상태별 객체 생성
     val passwordMenuClass = PasswordMenuClass(passwordProgramState)
@@ -42,136 +46,176 @@ class MainClass {
                     println("|| 4. 종료             ||")
                     println("========================")
                     print("메뉴를 선택해주세요 : ")
-                    val menuNum = readln().toInt()
-                    while (true) {
-                        when (menuNum) {
-                            ProgramMainState.PROGRAM_STATE_List.itemNumber -> {
-                                println()
-                                var num = 1
-                                if (categoryList.isEmpty()) {
-                                    println("☆등록된 카테고리가 없습니다.☆")
-                                } else {
-                                    for (i in categoryList) {
-                                        println("$num : $i")
-                                        num++
+                    try {
+                        val menuNum = readln().toInt()
+                        while (true) {
+                            when (menuNum) {
+                                ProgramMainState.PROGRAM_STATE_List.itemNumber -> {
+                                    println()
+                                    var num = 1
+                                    if (categoryList.isEmpty()) {
+                                        println("☆등록된 카테고리가 없습니다.☆")
+                                    } else {
+                                        for (i in categoryList) {
+                                            println("$num : $i")
+                                            num++
+                                        }
+                                    }
+
+                                    println()
+
+                                    println("=====메모 카테고리 관리====")
+                                    println("|| 1. 카테고리 등록      ||")
+                                    println("|| 2. 카테고리 삭제      ||")
+                                    println("|| 3. 카테고리 수정      ||")
+                                    println("|| 4. 이전             ||")
+                                    println("========================")
+                                    print("카테고리 관리 메뉴 선택 : ")
+                                    val categoryNum = readln().toInt()
+
+                                    when (categoryNum) {
+                                        ProgramSelectCategoryState.PROGRAM_STATE_ADD_Category.itemNumber -> {
+                                            addCategory(categoryList)
+                                        }
+
+                                        ProgramSelectCategoryState.PROGRAM_STATE_DELETE__Category.itemNumber -> {
+                                            DeleteCategory(categoryList)
+                                        }
+
+                                        ProgramSelectCategoryState.PROGRAM_STATE_EDIT__Category.itemNumber -> {
+                                            EditCategory(categoryList)
+                                        }
+
+                                        ProgramSelectCategoryState.PROGRAM_STATE_END.itemNumber -> {
+                                            break
+                                        }
+
                                     }
                                 }
 
-                                println()
+                                ProgramMainState.PROGRAM_STATE_SELECT_CATEGORY.itemNumber -> {
 
-                                println("=====메모 카테고리 관리====")
-                                println("|| 1. 카테고리 등록      ||")
-                                println("|| 2. 카테고리 삭제      ||")
-                                println("|| 3. 카테고리 수정      ||")
-                                println("|| 4. 이전             ||")
-                                println("========================")
-                                print("카테고리 관리 메뉴 선택 : ")
-                                val categoryNum = readln().toInt()
+                                    println()
+                                    var num = 1
 
-                                when (categoryNum) {
-                                    ProgramSelectCategoryState.PROGRAM_STATE_ADD_Category.itemNumber -> {
-                                        addCategory(categoryList)
+                                    if (categoryList.isEmpty()) {
+                                        println("☆등록된 카테고리가 없습니다.☆")
+                                    } else {
+                                        for (i in categoryList) {
+                                            println("$num : $i")
+                                            num++
+                                        }
                                     }
 
-                                    ProgramSelectCategoryState.PROGRAM_STATE_DELETE__Category.itemNumber -> {
-                                        DeleteCategory(categoryList)
-                                    }
+                                    print("선택할 카테고리 번호를 입력해주세요(0. 이전) : ")
+                                    var categoryNum = readln().toInt()
 
-                                    ProgramSelectCategoryState.PROGRAM_STATE_EDIT__Category.itemNumber -> {
-                                        EditCategory(categoryList)
-                                    }
-
-                                    ProgramSelectCategoryState.PROGRAM_STATE_END.itemNumber -> {
+                                    if (categoryNum == 0) {
                                         break
                                     }
+                                    while (true) {
+                                        if (categoryNum in 1..categoryList.size) {
 
-                                }
-                            }
+                                            val selectedCategory = categoryList[categoryNum - 1]
+                                            val memoFile = File("$selectedCategory.txt")
+                                            val memoList = loadMemoList(memoFile)
+                                            println()
+                                            if (memoList.isEmpty()) {
+                                                println("등록된 메모가 없습니다.")
+                                            } else {
+                                                for ((index, memo) in memoList.withIndex()) {
+                                                    println("${index + 1}. ${memo.title}")
+                                                }
+                                            }
+                                            println()
+                                            println("=====================================================")
+                                            print("1. 메모 보기 2. 메모 등록 3. 메모 수정 4. 메모 삭제 5. 이전: ")
+                                            val selectMemo = readln().toInt()
 
-                            ProgramMainState.PROGRAM_STATE_SELECT_CATEGORY.itemNumber -> {
+                                            when (selectMemo) {
+                                                ProgramChoiceCategoryState.PROGRAM_STATE_VIEW_MEMO.itemNumber -> {
+                                                    // 메모 보기
+                                                    viewMemo(categoryNum, categoryList)
+                                                }
 
-                                println()
-                                var num = 1
+                                                ProgramChoiceCategoryState.PROGRAM_STATE_ADD_MEMO.itemNumber -> {
+                                                    // 메모 등록
+                                                    addMemo(categoryNum, categoryList)
+                                                }
 
-                                if (categoryList.isEmpty()) {
-                                    println("☆등록된 카테고리가 없습니다.☆")
-                                } else {
-                                    for (i in categoryList) {
-                                        println("$num : $i")
-                                        num++
+                                                ProgramChoiceCategoryState.PROGRAM_STATE_EDIT_MEMO.itemNumber -> {
+                                                    // 메모 수정
+                                                    println()
+                                                    editMemo(categoryNum, categoryList)
+                                                }
+
+                                                ProgramChoiceCategoryState.PROGRAM_STATE_DELETE_MEMO.itemNumber -> {
+                                                    // 메모 삭제
+                                                    deleteMemo(categoryNum, categoryList)
+                                                }
+
+                                                ProgramChoiceCategoryState.PROGRAM_STATE_BEFORE.itemNumber -> {
+                                                    // 이전
+                                                    break
+                                                }
+                                            }
+                                        }
+
                                     }
                                 }
 
-                                print("선택할 카테고리 번호를 입력해주세요(0. 이전) : ")
-                                var categoryNum = readln().toInt()
+                                ProgramMainState.PROGRAM_STATE_SEE_ALL_NOTES.itemNumber -> {
+                                    val selectedCategory = categoryList[1 - 1]
+                                    val memoFile = File("$selectedCategory.txt")
+                                    val memoList = loadMemoList(memoFile)
 
-                                if (categoryNum == 0) {
+                                    var num = 0
+                                    if (categoryList.isEmpty()) {
+                                        println("☆등록된 카테고리가 없습니다.☆")
+                                    } else {
+                                        for (i in categoryList) {
+
+                                            println("------------------------------------------")
+                                            println(i)
+                                            println("------------------------------------------")
+
+                                            val selectedCategory = categoryList[num]
+                                            val memoFile = File("$selectedCategory.txt")
+                                            val memoList = loadMemoList(memoFile)
+
+                                            if (memoList.isEmpty()) {
+                                                println()
+                                                println("등록된 메모가 없습니다.")
+                                                println()
+                                            } else {
+                                                for (memo in memoList) {
+                                                    println()
+                                                    println("제목 : ${memo.title}")
+                                                    println("내용 : ${memo.content}")
+                                                    println()
+                                                }
+                                            }
+                                            num++
+                                        }
+                                    }
                                     break
                                 }
-                                while (true) {
-                                    if (categoryNum in 1..categoryList.size) {
 
-                                        val selectedCategory = categoryList[categoryNum - 1]
-                                        val memoFile = File("$selectedCategory.txt")
-                                        val memoList = loadMemoList(selectedCategory, memoFile)
-                                        println()
-                                        if (memoList.isEmpty()) {
-                                            println("등록된 메모가 없습니다.")
-                                        } else {
-                                            for ((index, memo) in memoList.withIndex()) {
-                                                println("${index + 1}. ${memo.title}")
-                                            }
-                                        }
-                                        println()
-                                        println("=====================================================")
-                                        print("1. 메모 보기 2. 메모 등록 3. 메모 수정 4. 메모 삭제 5. 이전: ")
-                                        val selectMemo = readln().toInt()
-
-                                        when (selectMemo) {
-                                            ProgramChoiceCategoryState.PROGRAM_STATE_VIEW_MEMO.itemNumber -> {
-                                                // 메모 보기
-
-                                            }
-
-                                            ProgramChoiceCategoryState.PROGRAM_STATE_ADD_MEMO.itemNumber -> {
-                                                // 메모 등록
-                                                addMemo(categoryNum, categoryList, selectedCategory)
-                                            }
-
-                                            ProgramChoiceCategoryState.PROGRAM_STATE_EDIT_MEMO.itemNumber -> {
-                                                // 메모 수정
-                                                println()
-                                                editMemo(categoryNum, categoryList, selectedCategory)
-                                            }
-
-                                            ProgramChoiceCategoryState.PROGRAM_STATE_DELETE_MEMO.itemNumber -> {
-                                                // 메모 삭제
-                                            }
-
-                                            ProgramChoiceCategoryState.PROGRAM_STATE_BEFORE.itemNumber -> {
-                                                // 이전
-                                                break
-                                            }
-                                        }
-                                    }
-
+                                ProgramMainState.PROGRAM_STATE_END.itemNumber -> {
+                                    println("프로그램을 종료합니다")
+                                    exitProcess(0)
                                 }
                             }
-
-                            ProgramMainState.PROGRAM_STATE_SEE_ALL_NOTES.itemNumber -> {
-
-                            }
-
-                            ProgramMainState.PROGRAM_STATE_END.itemNumber -> {
-                                println("프로그램을 종료합니다")
-                                exitProcess(0)
-                            }
                         }
+                    }catch (e:Exception){
+                        println("숫자만 입력해주세요.")
                     }
                 }
             }
         }
     }
+
+
 }
 
 // 패스워드 -> 메뉴 패스워드가 일치하면 상태 이동을 위한 클래스
@@ -189,6 +233,7 @@ class PasswordMenuClass(var programState: ProgramPassWordMainState) {
 
     }
 
+    // 비밀번호 비교
     private fun password() {
         while (true) {
             print("로그인을 하시려면 비밀 번호를 입력하세요 : ")
@@ -204,7 +249,7 @@ class PasswordMenuClass(var programState: ProgramPassWordMainState) {
         }
     }
 
-
+    // 비밀번호 셋팅
     fun passwordSetting() {
         while (true) {
             try {
@@ -225,6 +270,8 @@ class PasswordMenuClass(var programState: ProgramPassWordMainState) {
                     fos.close()
                     password()
                     break
+                } else {
+                    println("다시 입력해주세요")
                 }
 
             } catch (e: Exception) {
@@ -253,18 +300,19 @@ class PasswordMenuClass(var programState: ProgramPassWordMainState) {
 
 }
 
+// 카테고리를 읽는 함수
 fun loadCategoryList(categoryList: MutableList<String>) {
     val categoryFile = File("categoryList.txt")
 
-    if (categoryFile.exists()) {
+    if (categoryFile.exists()) { //만약 파일이 존재한다면
         try {
             val fis = FileInputStream(categoryFile)
             val ois = ObjectInputStream(fis)
 
             val loadedCategoryList = ois.readObject() as MutableList<String>
 
-            categoryList.clear()
-            categoryList.addAll(loadedCategoryList)
+            categoryList.clear() // 기존의 categoryList를 비운다
+            categoryList.addAll(loadedCategoryList) // 역직렬화된 카테고리 목록을 categoryList에 추가합니다.
 
             ois.close()
             fis.close()
@@ -274,6 +322,7 @@ fun loadCategoryList(categoryList: MutableList<String>) {
     }
 }
 
+// 카테고리 리스트를 파일에 저장하는 함수
 fun saveCategoryList(categoryList: MutableList<String>) {
     val categoryFile = File("categoryList.txt")
 
@@ -290,6 +339,7 @@ fun saveCategoryList(categoryList: MutableList<String>) {
     }
 }
 
+// 카테고리 추가 함수
 fun addCategory(categoryList: MutableList<String>) {
     print("등록할 카테고리 이름을 입력해주세요 : ")
     val categoryName = readln()
@@ -311,6 +361,7 @@ fun addCategory(categoryList: MutableList<String>) {
     }
 }
 
+// 카테고리 삭제
 fun DeleteCategory(categoryList: MutableList<String>) {
     if (categoryList.isEmpty()) {
         println("삭제할 카테고리가 없어요.")
@@ -343,12 +394,41 @@ fun EditCategory(categoryList: MutableList<String>) {
     }
 }
 
-// 메모 등록
-fun addMemo(categoryNum: Int, categoryList: MutableList<String>, selectedCategory: String) {
+// 메모 보기
+fun viewMemo(categoryNum: Int, categoryList: MutableList<String>) {
     val categoryName = categoryList[categoryNum - 1]
     val memoFile = File("$categoryName.txt")
 
-    val existingMemos = loadMemoList(selectedCategory, memoFile)
+    val memoList = loadMemoList(memoFile)  // 선택된 카테고리의 메모 리스트를 불러옴
+
+    if (memoList.isEmpty()) {
+        println("메모가 없습니다.")
+    } else {
+        print("확인할 메모의 번호를 입력해주세요 (0. 이전) : ")
+        val num = readln().toInt()
+
+        if (num == 0) {
+            return
+        }
+
+        if (num in 1..memoList.size) {
+            println("+++++++++++++++++++++++++++++++++++++")
+            println("제목 : ${memoList[num - 1].title}  ")
+            println("내용 : ${memoList[num - 1].content}")
+            println("+++++++++++++++++++++++++++++++++++++")
+        } else {
+            println("잘못된 번호입니다..")
+        }
+    }
+}
+
+
+// 메모 등록
+fun addMemo(categoryNum: Int, categoryList: MutableList<String>) {
+    val categoryName = categoryList[categoryNum - 1]
+    val memoFile = File("$categoryName.txt")
+
+    val existingMemos = loadMemoList(memoFile)
 
     print("메모 제목: ")
     val memoTitle = readln()
@@ -367,8 +447,8 @@ fun addMemo(categoryNum: Int, categoryList: MutableList<String>, selectedCategor
 // 메모 저장용 data class 제목, 내용
 data class Memo(var title: String, var content: String) : Serializable
 
-// 메모 읽기
-fun loadMemoList(category: String, file: File): MutableList<Memo> {
+// 메모 리스트 읽기
+fun loadMemoList(file: File): MutableList<Memo> {
     val memoList = mutableListOf<Memo>()
 
     if (file.exists()) {
@@ -404,54 +484,75 @@ fun saveMemoList(file: File, memos: MutableList<Memo>) {
 }
 
 // 메모 수정하기
-fun editMemo(categoryNum: Int, categoryList: MutableList<String>, selectedCategory: String) {
+fun editMemo(categoryNum: Int, categoryList: MutableList<String>) {
     val categoryName = categoryList[categoryNum - 1]
     val memoFile = File("$categoryName.txt")
 
-    val memoList = loadMemoList(selectedCategory, memoFile)
+    val memoList = loadMemoList(memoFile)
 
     if (memoList.isEmpty()) {
         println("수정할 메모가 없습니다.")
     } else {
-
-
         print("수정할 메모의 번호를 입력하세요 (0. 이전): ")
         val memoNum = readln().toInt()
 
         if (memoNum == 0) {
-
             return
         }
 
         if (memoNum in 1..memoList.size) {
             val selectedMemo = memoList[memoNum - 1]
-            for ((index, memo) in memoList.withIndex()) {
 
-                println("제목 : ${memo.title}")
-                print("메모의 새로운 제목을 입력해주세요(0 입력시 무시) : ")
-                val newTitle = readln()
+            println("제목 : ${selectedMemo.title}")
+            print("메모의 새로운 제목을 입력해주세요(0 입력시 무시) : ")
+            val newTitle = readln()
 
-                println("내용 : ${memo.content}")
-                print("메모의 새로운 내용을 입력해주세요(0 입력시 무시) : ")
-                val newContent = readln()
+            println("내용 : ${selectedMemo.content}")
+            print("메모의 새로운 내용을 입력해주세요(0 입력시 무시) : ")
+            val newContent = readln()
 
-                // 0 누르면 기존꺼 아니면 새로운 거
-                if (newTitle == "0") {
-                    selectedMemo.title = memo.title
-                } else {
-                    selectedMemo.title = newTitle
-                }
+            // 0 누르면 기존꺼 아니면 새로운 거
+            if (newTitle == "0") {
+                selectedMemo.title = selectedMemo.title
+            } else {
+                selectedMemo.title = newTitle
+            }
 
-                if (newTitle == "0") {
-                    selectedMemo.content = memo.content
-                } else {
-                    selectedMemo.content = newTitle
-                }
+            if (newContent == "0") {
+                selectedMemo.content = selectedMemo.content
+            } else {
+                selectedMemo.content = newContent
             }
             saveMemoList(memoFile, memoList)
 
         } else {
             println("메모 번호를 확인해 주세요.")
+        }
+    }
+}
+
+// 메모 삭제 함수
+fun deleteMemo(categoryNum: Int, categoryList: MutableList<String>) {
+    val categoryName = categoryList[categoryNum - 1]
+    val memoFile = File("$categoryName.txt")
+
+    val memoList = loadMemoList(memoFile)  // 선택된 카테고리의 메모 리스트를 불러옴
+
+    if (memoList.isEmpty()) {
+        println("삭제할 메모가 없습니다.")
+    } else {
+        print("삭제할 메모의 번호를 입력해주세요 (0. 이전) : ")
+        val num = readln().toInt()
+
+        if (num == 0) {
+            return
+        }
+
+        if (num in 1..memoList.size) {
+            memoList.removeAt(num - 1)
+            saveMemoList(memoFile, memoList)
+        } else {
+            println("잘못된 번호입니다..")
         }
     }
 }
